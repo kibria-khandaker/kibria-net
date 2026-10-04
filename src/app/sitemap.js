@@ -1,3 +1,6 @@
+export const dynamic = "force-static";
+export const revalidate = false;
+
 import siteInfo from "@/data/siteInfo";
 import { dataSources } from "@/data/dataSources";
 

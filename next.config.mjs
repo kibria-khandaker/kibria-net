@@ -1,5 +1,5 @@
 const nextConfig = {
-  allowedDevOrigins: ["192.168.0.122"],
+  output: "export",
 
   images: {
     unoptimized: true,

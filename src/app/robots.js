@@ -1,3 +1,5 @@
+export const dynamic = "force-static";
+export const revalidate = false;
 import siteInfo from "@/data/siteInfo";
 
 export default function robots() {
