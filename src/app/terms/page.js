@@ -1,16 +1,16 @@
 import Container from "@/components/Container";
+import { createPageMetadata } from "@/utils/pageMetadata";
 
-
-export const metadata = {
+export const metadata = createPageMetadata({
   title: "Terms",
 
   description:
     "Terms and general information for using Kibria.net.",
 
-  alternates: {
-    canonical: "/terms",
-  },
-};
+  path: "/terms",
+
+  socialTitle: "Terms | Kibria.net",
+});
 
 
 export default function TermsPage() {

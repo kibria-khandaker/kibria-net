@@ -1,16 +1,16 @@
 import Container from "@/components/Container";
+import { createPageMetadata } from "@/utils/pageMetadata";
 
-
-export const metadata = {
+export const metadata = createPageMetadata({
   title: "Privacy Policy",
 
   description:
     "Privacy information for Kibria.net, the personal website of Golam Kibria.",
 
-  alternates: {
-    canonical: "/privacy",
-  },
-};
+  path: "/privacy",
+
+  socialTitle: "Privacy Policy | Kibria.net",
+});
 
 
 export default function PrivacyPage() {

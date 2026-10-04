@@ -2,25 +2,21 @@ import Container from "@/components/Container";
 
 import { dataSources } from "@/data/dataSources";
 import { getJsonData } from "@/services/githubData";
+import { createPageMetadata } from "@/utils/pageMetadata";
 
-
-export const metadata = {
+export const metadata = createPageMetadata({
   title: "Resume",
 
   description:
     "View professional resume options for Golam Kibria covering web development, frontend development, React and WordPress.",
 
-  alternates: {
-    canonical: "/resume",
-  },
+  path: "/resume",
 
-  openGraph: {
-    title: "Resume | Golam Kibria",
-    description:
-      "View professional resume options for Golam Kibria covering different areas of web development.",
-    url: "/resume",
-  },
-};
+  socialTitle: "Resume | Golam Kibria",
+
+  socialDescription:
+    "View professional resume options for Golam Kibria covering different areas of web development.",
+});
 
 
 export default async function ResumePage() {

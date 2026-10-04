@@ -20,9 +20,9 @@ export default function LearningCard({ item }) {
           {item.learningCategory}
         </p>
 
-        <h2 className="mt-2 text-xl font-bold text-brand-navy">
+        <h3 className="mt-2 text-xl font-bold text-brand-navy">
           {item.learningTitle}
-        </h2>
+        </h3>
 
         <p className="mt-4 leading-7 text-brand-slate">
           {item.learningTopics}

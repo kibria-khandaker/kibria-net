@@ -9,25 +9,18 @@ import {
   stripHtml,
   formatBlogDate,
 } from "@/utils/blogHelpers";
+import { createPageMetadata } from "@/utils/pageMetadata";
 
-
-export const metadata = {
+export const metadata = createPageMetadata({
   title: "Blog",
 
   description:
     "Articles, experiences, learning notes and thoughts shared by Golam Kibria.",
 
-  alternates: {
-    canonical: "/blog",
-  },
+  path: "/blog",
 
-  openGraph: {
-    title: "Blog | Golam Kibria",
-    description:
-      "Articles, experiences, learning notes and thoughts shared by Golam Kibria.",
-    url: "/blog",
-  },
-};
+  socialTitle: "Blog | Golam Kibria",
+});
 
 
 export default async function BlogPage() {

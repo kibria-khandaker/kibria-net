@@ -11,7 +11,7 @@ const siteInfo = {
     "Personal website of Golam Kibria featuring web development, digital work, projects, tools, learning, interests and personal journey.",
 
   intro:
-    "I work across web development, WordPress, React and Next.js, digital platforms and practical online solutions while continuously learning and exploring new ideas.",
+    "I work with web development, WordPress, React, Next.js, digital platforms, online business solutions, tracking and analytics while continuously learning and exploring new ideas.",
 
   logo: "/images/branding/kibria-logo.png",
 };

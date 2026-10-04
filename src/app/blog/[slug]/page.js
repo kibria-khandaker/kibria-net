@@ -76,19 +76,32 @@ export async function generateMetadata({ params }) {
       title: post.title,
       description,
       url: `/blog/${slug}`,
+
       type: "article",
+      siteName: siteInfo.siteName,
+      locale: "en_US",
 
       publishedTime: post.published,
       modifiedTime: post.updated,
 
-      ...(image && {
-        images: [
-          {
-            url: image,
-            alt: post.title,
-          },
-        ],
-      }),
+      images: [
+        {
+          url: image || siteInfo.logo,
+          alt: image
+            ? post.title
+            : `${siteInfo.siteName} logo`,
+        },
+      ],
+    },
+
+    twitter: {
+      card: "summary_large_image",
+      title: post.title,
+      description,
+
+      images: [
+        image || siteInfo.logo,
+      ],
     },
   };
 }
@@ -116,6 +129,9 @@ export default async function BlogPostPage({ params }) {
   const articleUrl =
     `${siteInfo.domain}/blog/${slug}`;
 
+  const blogUrl =
+    `${siteInfo.domain}/blog`;
+
 
   const articleSchema = {
     "@context": "https://schema.org",
@@ -136,13 +152,47 @@ export default async function BlogPostPage({ params }) {
 
     author: {
       "@type": "Person",
+      "@id": `${siteInfo.domain}/#person`,
       name: siteInfo.name,
       url: siteInfo.domain,
+    },
+
+    publisher: {
+      "@id": `${siteInfo.domain}/#person`,
     },
 
     ...(image && {
       image: [image],
     }),
+  };
+
+
+  const breadcrumbSchema = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+
+    itemListElement: [
+      {
+        "@type": "ListItem",
+        position: 1,
+        name: "Home",
+        item: siteInfo.domain,
+      },
+
+      {
+        "@type": "ListItem",
+        position: 2,
+        name: "Blog",
+        item: blogUrl,
+      },
+
+      {
+        "@type": "ListItem",
+        position: 3,
+        name: post.title,
+        item: articleUrl,
+      },
+    ],
   };
 
 
@@ -153,6 +203,15 @@ export default async function BlogPostPage({ params }) {
         type="application/ld+json"
         dangerouslySetInnerHTML={{
           __html: jsonLd(articleSchema),
+        }}
+      />
+
+
+      {/* Breadcrumb structured data */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: jsonLd(breadcrumbSchema),
         }}
       />
 

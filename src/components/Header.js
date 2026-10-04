@@ -70,7 +70,7 @@ export default function Header() {
 
           {/* Desktop Navigation */}
           <nav
-            className="hidden items-center gap-6 md:flex"
+            className="hidden items-center gap-6 lg:flex"
             aria-label="Main navigation"
           >
 
@@ -171,7 +171,7 @@ export default function Header() {
             }
             aria-expanded={isMenuOpen}
             aria-controls="mobile-navigation"
-            className="flex min-h-11 min-w-20 items-center justify-center rounded-lg border border-brand-border bg-white px-4 text-sm font-semibold text-brand-navy md:hidden"
+            className="flex min-h-11 min-w-20 items-center justify-center rounded-lg border border-brand-border bg-white px-4 text-sm font-semibold text-brand-navy lg:hidden"
           >
             {isMenuOpen ? "Close" : "Menu"}
           </button>
@@ -185,7 +185,7 @@ export default function Header() {
           <nav
             id="mobile-navigation"
             aria-label="Mobile navigation"
-            className="border-t border-brand-border pb-5 pt-3 md:hidden"
+            className="border-t border-brand-border pb-5 pt-3 lg:hidden"
           >
 
             <div className="flex flex-col gap-1">

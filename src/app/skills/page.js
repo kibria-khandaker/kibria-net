@@ -1,25 +1,21 @@
 import Container from "@/components/Container";
 
 import { skillGroups } from "@/data/skills";
+import { createPageMetadata } from "@/utils/pageMetadata";
 
-
-export const metadata = {
+export const metadata = createPageMetadata({
   title: "Skills & Technologies",
 
   description:
     "Explore the web development technologies, platforms and digital tools Golam Kibria has worked with across frontend, full-stack, WordPress and digital projects.",
 
-  alternates: {
-    canonical: "/skills",
-  },
+  path: "/skills",
 
-  openGraph: {
-    title: "Skills & Technologies | Golam Kibria",
-    description:
-      "Web development technologies, platforms and digital tools used by Golam Kibria.",
-    url: "/skills",
-  },
-};
+  socialTitle: "Skills & Technologies | Golam Kibria",
+
+  socialDescription:
+    "Web development technologies, platforms and digital tools used by Golam Kibria.",
+});
 
 
 export default function SkillsPage() {

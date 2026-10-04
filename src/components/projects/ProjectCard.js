@@ -29,9 +29,9 @@ export default function ProjectCard({ project }) {
           {project.pType}
         </p>
 
-        <h2 className="mt-2 text-xl font-bold text-brand-navy">
+        <h3 className="mt-2 text-xl font-bold text-brand-navy">
           {project.name}
-        </h2>
+        </h3>
 
         <p className="mt-3 text-sm leading-6 text-brand-slate">
           {project.technology}

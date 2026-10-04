@@ -10,21 +10,14 @@ import LearningSection from "@/components/home/LearningSection";
 import ToolsSection from "@/components/home/ToolsSection";
 
 import siteInfo from "@/data/siteInfo";
+import { createPageMetadata } from "@/utils/pageMetadata";
 
-export const metadata = {
+export const metadata = createPageMetadata({
   title: `${siteInfo.name} | Personal Website`,
   description: siteInfo.description,
-
-  alternates: {
-    canonical: "/",
-  },
-
-  openGraph: {
-    title: `${siteInfo.name} | Personal Website`,
-    description: siteInfo.description,
-    url: "/",
-  },
-};
+  path: "/",
+  socialTitle: `${siteInfo.name} | Personal Website`,
+});
 
 export default function Home() {
   return (

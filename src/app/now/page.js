@@ -2,25 +2,21 @@ import Link from "next/link";
 
 import Container from "@/components/Container";
 import { homeData } from "@/data/homeData";
+import { createPageMetadata } from "@/utils/pageMetadata";
 
-
-export const metadata = {
+export const metadata = createPageMetadata({
   title: "Now",
 
   description:
     "See what Golam Kibria is currently focused on, including current projects, web development, learning and digital work.",
 
-  alternates: {
-    canonical: "/now",
-  },
+  path: "/now",
 
-  openGraph: {
-    title: "Now | Golam Kibria",
-    description:
-      "A current snapshot of the projects, technologies and areas receiving Golam Kibria's attention.",
-    url: "/now",
-  },
-};
+  socialTitle: "Now | Golam Kibria",
+
+  socialDescription:
+    "A current snapshot of the projects, technologies and areas receiving Golam Kibria's attention.",
+});
 
 
 export default function NowPage() {
@@ -29,7 +25,7 @@ export default function NowPage() {
       <section className="border-b border-brand-border bg-brand-navy text-brand-ivory">
         <Container className="py-16 sm:py-20 lg:py-24">
 
-          <p className="mb-3 text-sm font-semibold uppercase tracking-wider text-brand-teal">
+          <p className="mb-3 text-sm font-semibold uppercase tracking-wider text-brand-ivory">
             Right Now
           </p>
 

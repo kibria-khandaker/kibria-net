@@ -15,7 +15,7 @@ export default function NowSection() {
 
           <div>
 
-            <p className="mb-3 text-sm font-semibold uppercase tracking-wider text-brand-teal">
+            <p className="mb-3 text-sm font-semibold uppercase tracking-wider text-brand-ivory">
               Right Now
             </p>
 
@@ -33,7 +33,7 @@ export default function NowSection() {
 
             <Link
               href="/now"
-              className="mt-6 inline-flex font-semibold text-brand-teal hover:underline"
+              className="mt-6 inline-flex font-semibold text-brand-ivory hover:underline"
             >
               View current focus →
             </Link>

@@ -6,7 +6,7 @@ import Footer from "@/components/Footer";
 
 import siteInfo from "@/data/siteInfo";
 import { socialLinks } from "@/data/socialLinks";
-
+import { skillGroups } from "@/data/skills";
 
 const geist = Geist({
   subsets: ["latin"],
@@ -51,10 +51,8 @@ export const metadata = {
 
   twitter: {
     card: "summary_large_image",
-
     title: `${siteInfo.name} | Personal Website`,
     description: siteInfo.description,
-
     images: [siteInfo.logo],
   },
 
@@ -84,24 +82,15 @@ export default function RootLayout({ children }) {
         name: siteInfo.name,
         url: siteInfo.domain,
 
-        description: siteInfo.description,
+        description: siteInfo.intro,
 
         sameAs: socialLinks
           .filter((item) => item.sameAs !== false)
           .map((item) => item.url),
 
-        knowsAbout: [
-          "Web Development",
-          "WordPress",
-          "React.js",
-          "Next.js",
-          "JavaScript",
-          "Digital Platforms",
-          "Meta Pixel",
-          "Conversion API",
-          "Conversion Tracking",
-          "Analytics",
-        ],
+        knowsAbout: skillGroups.flatMap(
+            (group) => group.skills
+          ),
       },
 
       {

@@ -2,25 +2,21 @@ import Link from "next/link";
 
 import Container from "@/components/Container";
 import { homeData } from "@/data/homeData";
+import { createPageMetadata } from "@/utils/pageMetadata";
 
-
-export const metadata = {
+export const metadata = createPageMetadata({
   title: "Interests",
 
   description:
     "Explore Golam Kibria's interests in technology, online business, learning, digital systems and other areas beyond individual projects.",
 
-  alternates: {
-    canonical: "/interests",
-  },
+  path: "/interests",
 
-  openGraph: {
-    title: "Interests | Golam Kibria",
-    description:
-      "Technology, online business, learning, digital systems and other areas Golam Kibria enjoys exploring.",
-    url: "/interests",
-  },
-};
+  socialTitle: "Interests | Golam Kibria",
+
+  socialDescription:
+    "Technology, online business, learning, digital systems and other areas Golam Kibria enjoys exploring.",
+});
 
 
 export default function InterestsPage() {

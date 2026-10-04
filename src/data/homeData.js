@@ -1,14 +1,14 @@
+import siteInfo from "@/data/siteInfo";
+
 export const homeData = {
   hero: {
     label: "Personal Website",
 
     title: "Hi, I'm Golam Kibria.",
 
-    headline:
-      "Web Developer, Digital Professional & Lifelong Learner.",
+    headline: `${siteInfo.headline}.`,
 
-    description:
-      "I work with web development, WordPress, React, Next.js, digital platforms, online business solutions, tracking and analytics while continuously learning and exploring new ideas.",
+    description: siteInfo.intro,
   },
 
 

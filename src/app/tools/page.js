@@ -3,24 +3,18 @@ import ToolCard from "@/components/tools/ToolCard";
 
 import { dataSources } from "@/data/dataSources";
 import { getJsonData } from "@/services/githubData";
+import { createPageMetadata } from "@/utils/pageMetadata";
 
-export const metadata = {
+export const metadata = createPageMetadata({
   title: "Tools",
 
   description:
     "Explore useful web applications, calculators and tools created by Golam Kibria.",
 
-  alternates: {
-    canonical: "/tools",
-  },
+  path: "/tools",
 
-  openGraph: {
-    title: "Tools by Golam Kibria",
-    description:
-      "Explore useful web applications, calculators and tools created by Golam Kibria.",
-    url: "/tools",
-  },
-};
+  socialTitle: "Tools by Golam Kibria",
+});
 
 export default async function ToolsPage() {
   const tools = await getJsonData(dataSources.tools);

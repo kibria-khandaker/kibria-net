@@ -17,7 +17,7 @@ export default function Footer() {
             © {currentYear} {siteInfo.siteName}. All rights reserved.
           </p>
 
-          <nav aria-label="Social links">
+          <nav aria-label="Social and contact links">
             <div className="flex flex-wrap items-center gap-5">
               {socialLinks.map((item) => (
                 <Link

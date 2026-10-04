@@ -3,24 +3,18 @@ import LearningCard from "@/components/learning/LearningCard";
 
 import { dataSources } from "@/data/dataSources";
 import { getJsonData } from "@/services/githubData";
+import { createPageMetadata } from "@/utils/pageMetadata";
 
-export const metadata = {
+export const metadata = createPageMetadata({
   title: "Learning",
 
   description:
     "Explore the technologies, topics and subjects Golam Kibria has learned and continues to explore.",
 
-  alternates: {
-    canonical: "/learning",
-  },
+  path: "/learning",
 
-  openGraph: {
-    title: "Learning | Golam Kibria",
-    description:
-      "Explore the technologies, topics and subjects Golam Kibria has learned and continues to explore.",
-    url: "/learning",
-  },
-};
+  socialTitle: "Learning | Golam Kibria",
+});
 
 export default async function LearningPage() {
   const learningData = await getJsonData(dataSources.learning);

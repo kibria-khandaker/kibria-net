@@ -3,24 +3,18 @@ import ProjectCard from "@/components/projects/ProjectCard";
 
 import { dataSources } from "@/data/dataSources";
 import { getJsonData } from "@/services/githubData";
+import { createPageMetadata } from "@/utils/pageMetadata";
 
-export const metadata = {
+export const metadata = createPageMetadata({
   title: "Projects",
 
   description:
     "Explore web development, WordPress, React, Next.js and full-stack projects by Golam Kibria.",
 
-  alternates: {
-    canonical: "/projects",
-  },
+  path: "/projects",
 
-  openGraph: {
-    title: "Projects by Golam Kibria",
-    description:
-      "Explore web development, WordPress, React, Next.js and full-stack projects by Golam Kibria.",
-    url: "/projects",
-  },
-};
+  socialTitle: "Projects by Golam Kibria",
+});
 
 export default async function ProjectsPage() {
   const projects = await getJsonData(dataSources.projects);

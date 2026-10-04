@@ -4,31 +4,26 @@ import Container from "@/components/Container";
 
 import siteInfo from "@/data/siteInfo";
 import { homeData } from "@/data/homeData";
-
+import { createPageMetadata } from "@/utils/pageMetadata";
 
 function jsonLd(data) {
   return JSON.stringify(data).replace(/</g, "\\u003c");
 }
 
 
-export const metadata = {
+export const metadata = createPageMetadata({
   title: "About Me",
 
   description:
     "Learn about Golam Kibria, his work in web development, WordPress, modern web technologies, digital platforms, tracking, learning and personal projects.",
 
-  alternates: {
-    canonical: "/about",
-  },
+  path: "/about",
 
-  openGraph: {
-    title: "About Golam Kibria",
-    description:
-      "Learn about Golam Kibria, his work, technologies, digital experience, interests and learning journey.",
-    url: "/about",
-    type: "website",
-  },
-};
+  socialTitle: "About Golam Kibria",
+
+  socialDescription:
+    "Learn about Golam Kibria, his work, technologies, digital experience, interests and learning journey.",
+});
 
 
 export default function AboutPage() {
@@ -45,8 +40,8 @@ export default function AboutPage() {
   const aboutPageSchema = {
     "@context": "https://schema.org",
     "@type": "AboutPage",
-
-    "@id": `${aboutUrl}/#webpage`,
+ 
+    "@id": `${aboutUrl}#webpage`,
 
     url: aboutUrl,
     name: `About ${siteInfo.name}`,

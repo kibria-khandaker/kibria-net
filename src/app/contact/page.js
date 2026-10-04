@@ -2,25 +2,21 @@ import Container from "@/components/Container";
 
 import siteInfo from "@/data/siteInfo";
 import { socialLinks } from "@/data/socialLinks";
+import { createPageMetadata } from "@/utils/pageMetadata";
 
-
-export const metadata = {
+export const metadata = createPageMetadata({
   title: "Contact",
 
   description:
-    "Contact Golam Kibria and find links to his public professional and social profiles.",
+    "Contact Golam Kibria and find his public professional profiles and contact links.",
 
-  alternates: {
-    canonical: "/contact",
-  },
+  path: "/contact",
 
-  openGraph: {
-    title: "Contact Golam Kibria",
-    description:
-      "Public contact and professional profile links for Golam Kibria.",
-    url: "/contact",
-  },
-};
+  socialTitle: "Contact Golam Kibria",
+
+  socialDescription:
+    "Public contact and professional profile links for Golam Kibria.",
+});
 
 
 export default function ContactPage() {
@@ -38,7 +34,7 @@ export default function ContactPage() {
           </h1>
 
           <p className="mt-5 max-w-3xl text-lg leading-8 text-brand-slate">
-            You can use the public profile links below to find and connect
+            You can use the profile and contact links below to find and connect
             with {siteInfo.name}.
           </p>
 
@@ -56,7 +52,7 @@ export default function ContactPage() {
             id="contact-links-heading"
             className="text-2xl font-bold text-brand-navy sm:text-3xl"
           >
-            Public profiles
+            Profiles & Contact
           </h2>
 
 
@@ -77,7 +73,9 @@ export default function ContactPage() {
                     </span>
 
                     <span className="mt-2 text-sm text-brand-teal">
-                      Visit profile →
+                      {item.sameAs === false
+                        ? "Message on WhatsApp →"
+                        : "Visit profile →"}
                     </span>
                   </a>
 
