@@ -4,8 +4,11 @@ import Container from "@/components/Container";
 
 import siteInfo from "@/data/siteInfo";
 import { homeData } from "@/data/homeData";
-import { skillGroups } from "@/data/skills";
-import { socialLinks } from "@/data/socialLinks";
+
+
+function jsonLd(data) {
+  return JSON.stringify(data).replace(/</g, "\\u003c");
+}
 
 
 export const metadata = {
@@ -23,32 +26,55 @@ export const metadata = {
     description:
       "Learn about Golam Kibria, his work, technologies, digital experience, interests and learning journey.",
     url: "/about",
+    type: "website",
   },
 };
 
 
 export default function AboutPage() {
-  const personSchema = {
+  const aboutUrl =
+    `${siteInfo.domain}/about`;
+
+  const personId =
+    `${siteInfo.domain}/#person`;
+
+  const websiteId =
+    `${siteInfo.domain}/#website`;
+
+
+  const aboutPageSchema = {
     "@context": "https://schema.org",
-    "@type": "Person",
-    name: siteInfo.name,
-    url: siteInfo.domain,
+    "@type": "AboutPage",
 
-    description: siteInfo.description,
+    "@id": `${aboutUrl}/#webpage`,
 
-    sameAs: socialLinks.map((item) => item.url),
+    url: aboutUrl,
+    name: `About ${siteInfo.name}`,
 
-    knowsAbout: skillGroups.flatMap((group) => group.skills),
+    description:
+      "Learn about Golam Kibria, his work in web development, WordPress, modern web technologies, digital platforms, tracking, learning and personal projects.",
+
+    isPartOf: {
+      "@id": websiteId,
+    },
+
+    about: {
+      "@id": personId,
+    },
+
+    mainEntity: {
+      "@id": personId,
+    },
   };
 
 
   return (
     <>
-      {/* Person structured data for search engines and AI systems */}
+      {/* About page structured data */}
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
-          __html: JSON.stringify(personSchema),
+          __html: jsonLd(aboutPageSchema),
         }}
       />
 
@@ -83,6 +109,7 @@ export default function AboutPage() {
           <div className="grid gap-10 lg:grid-cols-2 lg:gap-16">
 
             <div>
+
               <h2
                 id="about-overview-heading"
                 className="text-3xl font-bold text-brand-navy"
@@ -100,6 +127,7 @@ export default function AboutPage() {
                 I also use this website to organize the things I build, learn,
                 explore and experience beyond individual development projects.
               </p>
+
             </div>
 
 

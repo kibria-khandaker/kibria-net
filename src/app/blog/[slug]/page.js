@@ -3,13 +3,21 @@ import Link from "next/link";
 
 import Container from "@/components/Container";
 
+import siteInfo from "@/data/siteInfo";
+
 import { getBlogPosts } from "@/services/bloggerData";
 
 import {
   getBlogSlug,
   stripHtml,
   formatBlogDate,
+  getBlogImage,
 } from "@/utils/blogHelpers";
+
+
+function jsonLd(data) {
+  return JSON.stringify(data).replace(/</g, "\\u003c");
+}
 
 
 async function getPost(slug) {
@@ -51,6 +59,10 @@ export async function generateMetadata({ params }) {
     stripHtml(post.content).slice(0, 160);
 
 
+  const image =
+    getBlogImage(post);
+
+
   return {
     title: post.title,
 
@@ -68,6 +80,15 @@ export async function generateMetadata({ params }) {
 
       publishedTime: post.published,
       modifiedTime: post.updated,
+
+      ...(image && {
+        images: [
+          {
+            url: image,
+            alt: post.title,
+          },
+        ],
+      }),
     },
   };
 }
@@ -84,20 +105,44 @@ export default async function BlogPostPage({ params }) {
   }
 
 
+  const description =
+    stripHtml(post.content).slice(0, 160);
+
+
+  const image =
+    getBlogImage(post);
+
+
+  const articleUrl =
+    `${siteInfo.domain}/blog/${slug}`;
+
+
   const articleSchema = {
     "@context": "https://schema.org",
     "@type": "BlogPosting",
 
     headline: post.title,
+    description,
+
+    url: articleUrl,
+
+    mainEntityOfPage: {
+      "@type": "WebPage",
+      "@id": articleUrl,
+    },
 
     datePublished: post.published,
     dateModified: post.updated,
 
     author: {
       "@type": "Person",
-      name: "Golam Kibria",
-      url: "https://kibria.net",
+      name: siteInfo.name,
+      url: siteInfo.domain,
     },
+
+    ...(image && {
+      image: [image],
+    }),
   };
 
 
@@ -107,7 +152,7 @@ export default async function BlogPostPage({ params }) {
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
-          __html: JSON.stringify(articleSchema),
+          __html: jsonLd(articleSchema),
         }}
       />
 
@@ -123,9 +168,11 @@ export default async function BlogPostPage({ params }) {
               Blog
             </p>
 
+
             <h1 className="mt-3 max-w-4xl text-4xl font-bold tracking-tight text-brand-navy sm:text-5xl">
               {post.title}
             </h1>
+
 
             <time
               dateTime={post.published}

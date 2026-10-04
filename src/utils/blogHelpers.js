@@ -37,3 +37,22 @@ export function formatBlogDate(date) {
     day: "numeric",
   }).format(new Date(date));
 }
+
+
+export function getBlogImage(post) {
+  if (
+    Array.isArray(post?.images) &&
+    post.images[0]?.url
+  ) {
+    return post.images[0].url;
+  }
+
+
+  const match =
+    post?.content?.match(
+      /<img[^>]+src=["']([^"']+)["']/i
+    );
+
+
+  return match?.[1] || null;
+}

@@ -5,9 +5,16 @@ import { notFound } from "next/navigation";
 import Container from "@/components/Container";
 
 import { dataSources } from "@/data/dataSources";
+import siteInfo from "@/data/siteInfo";
+
 import { getJsonData } from "@/services/githubData";
 
 import slugify from "@/utils/slugify";
+
+
+function jsonLd(data) {
+  return JSON.stringify(data).replace(/</g, "\\u003c");
+}
 
 
 async function getProject(slug) {
@@ -49,8 +56,10 @@ export async function generateMetadata({ params }) {
     };
   }
 
+
   const description =
     `${project.name} is a ${project.pType} built with ${project.technology}.`;
+
 
   return {
     title: project.name,
@@ -89,17 +98,80 @@ export default async function ProjectDetailsPage({ params }) {
     notFound();
   }
 
+
   const hasLiveProject =
     project.pUrl &&
     project.pUrl !== "#";
+
 
   const gallery =
     Array.isArray(project.allImg)
       ? project.allImg
       : [];
 
+
+  const description =
+    `${project.name} is a ${project.pType} built with ${project.technology}.`;
+
+
+  const projectUrl =
+    `${siteInfo.domain}/projects/${slug}`;
+
+
+  const projectImages = [
+    project.img1,
+    ...gallery,
+  ].filter(Boolean);
+
+
+  const projectSchema = {
+    "@context": "https://schema.org",
+    "@type": "CreativeWork",
+
+    name: project.name,
+    description,
+    url: projectUrl,
+
+    mainEntityOfPage: {
+      "@type": "WebPage",
+      "@id": projectUrl,
+    },
+
+    ...(projectImages.length > 0 && {
+      image: projectImages,
+    }),
+
+    creator: {
+      "@type": "Person",
+      name: siteInfo.name,
+      url: siteInfo.domain,
+    },
+
+    ...(project.category && {
+      genre: project.category,
+    }),
+
+    ...(project.technology && {
+      keywords: project.technology,
+    }),
+
+    ...(hasLiveProject && {
+      sameAs: project.pUrl,
+    }),
+  };
+
+
   return (
     <>
+      {/* Project structured data */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: jsonLd(projectSchema),
+        }}
+      />
+
+
       {/* Project Introduction */}
       <section className="border-b border-brand-border bg-brand-ivory">
         <Container className="py-16 sm:py-20 lg:py-24">
@@ -108,14 +180,17 @@ export default async function ProjectDetailsPage({ params }) {
             {project.category}
           </p>
 
+
           <h1 className="mt-3 max-w-4xl text-4xl font-bold tracking-tight text-brand-navy sm:text-5xl">
             {project.name}
           </h1>
+
 
           <p className="mt-5 max-w-3xl text-lg leading-8 text-brand-slate">
             {project.name} is a {project.pType} built using{" "}
             {project.technology}.
           </p>
+
 
           <div className="mt-8 flex flex-wrap gap-3">
 
@@ -129,6 +204,7 @@ export default async function ProjectDetailsPage({ params }) {
                 Visit Live Project ↗
               </a>
             )}
+
 
             <Link
               href="/projects"
@@ -162,10 +238,13 @@ export default async function ProjectDetailsPage({ params }) {
               )}
             </div>
 
+
             <div>
+
               <h2 className="text-2xl font-bold text-brand-navy sm:text-3xl">
                 Project Information
               </h2>
+
 
               <dl className="mt-6 space-y-5">
 
@@ -179,6 +258,7 @@ export default async function ProjectDetailsPage({ params }) {
                   </dd>
                 </div>
 
+
                 <div>
                   <dt className="text-sm font-semibold text-brand-teal">
                     Category
@@ -188,6 +268,7 @@ export default async function ProjectDetailsPage({ params }) {
                     {project.category}
                   </dd>
                 </div>
+
 
                 <div>
                   <dt className="text-sm font-semibold text-brand-teal">
@@ -200,6 +281,7 @@ export default async function ProjectDetailsPage({ params }) {
                 </div>
 
               </dl>
+
             </div>
 
           </div>
@@ -214,6 +296,7 @@ export default async function ProjectDetailsPage({ params }) {
           aria-labelledby="project-gallery-heading"
           className="border-t border-brand-border bg-brand-ivory"
         >
+
           <Container className="py-16 sm:py-20 lg:py-24">
 
             <h2
@@ -222,6 +305,7 @@ export default async function ProjectDetailsPage({ params }) {
             >
               Project Gallery
             </h2>
+
 
             <div className="mt-8 grid gap-5 md:grid-cols-2">
 
@@ -239,6 +323,7 @@ export default async function ProjectDetailsPage({ params }) {
             </div>
 
           </Container>
+
         </section>
       )}
     </>
