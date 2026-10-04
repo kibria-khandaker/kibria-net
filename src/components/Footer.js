@@ -33,6 +33,22 @@ export default function Footer() {
             </div>
           </nav>
 
+          <div className="flex items-center gap-4">
+            <Link
+              href="/privacy"
+              className="text-sm text-brand-slate hover:text-brand-teal"
+            >
+              Privacy
+            </Link>
+
+            <Link
+              href="/terms"
+              className="text-sm text-brand-slate hover:text-brand-teal"
+            >
+              Terms
+            </Link>
+          </div>
+
         </div>
       </Container>
     </footer>
